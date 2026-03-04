@@ -4,7 +4,7 @@ abstract class ContaBancaria
 {
     public string NumeroConta { get; private set; }
     public string Titular { get; private set; }
-    public decimal Saldo { get; private set; }
+    public decimal Saldo { get; protected set; }
     public ContaBancaria(string numeroConta, string titular, decimal saldoInicial)
     {
         NumeroConta = numeroConta;
@@ -12,7 +12,7 @@ abstract class ContaBancaria
         Saldo = saldoInicial;
     }
 
-    public void Depositar(decimal valor)
+    public virtual void Depositar(decimal valor)
     {
         if (valor > 0)
         {
@@ -24,7 +24,7 @@ abstract class ContaBancaria
             Console.WriteLine("Valor de depósito deve ser positivo.");
         }
     }
-    public void Sacar(decimal valor)
+    public virtual void Sacar(decimal valor)
     {
         if (valor > 0)
         {

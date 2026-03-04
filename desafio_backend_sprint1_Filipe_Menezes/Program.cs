@@ -20,16 +20,18 @@
         List<ContaBancaria> contas = new List<ContaBancaria>();
 
         contas .Add(new ContaCorrente("12345", "Filipe", 1000.00m));
-        contas .Add(new ContaPoupanca("54321", "Maria ", 5000.00m));
-        contas .Add(new ContaEmpresarial("6789", "FORD", 10000.00m));
+        contas .Add(new ContaPoupanca("54321", "Maria", 5000.00m));
+        contas .Add(new ContaEmpresarial("6789", "Ford", 10000.00m));
 
 
         int loginNumeroConta = 0;
         int opcao = 0;
 
+        ExibirLogo();
+
         void ExibirMenu()
         {
-            ExibirLogo();
+            
 
             Console.WriteLine("\nMenu de opções:");
             Console.WriteLine("1 - Acessar conta corrente");
@@ -38,14 +40,15 @@
             Console.WriteLine("4 - Sacar dinheiro");
             Console.WriteLine("5 - Depositar dinheiro");
             Console.WriteLine("6 - Consultar saldo");
-            Console.WriteLine("7 - Sair");
+            Console.WriteLine("7 - Realizar empréstimo");
+            Console.WriteLine("8 - Sair");
 
             opcao = int.Parse(Console.ReadLine());
 
             Console.WriteLine($"Você escolheu a opção {opcao}");
         }
 
-        while (opcao != 7)
+        while (opcao != 8)
         {
 
             ExibirMenu();
@@ -76,6 +79,11 @@
                                 Console.WriteLine("Conta encontrada:");
                                 ((ContaCorrente)conta).Detalhe_Corrente();
                             }
+
+                            else
+                            {
+                                Console.WriteLine("Conta não encontrada. Por favor, verifique o número da conta e o nome do titular.");
+                            }
                         }
                     }
 
@@ -84,37 +92,75 @@
                 case 2:
                     Console.WriteLine("Acessando conta poupança...");
 
-
-
-
                     Console.WriteLine("Digite o numero da conta");
                     int NumeroContaP = int.Parse(Console.ReadLine());
 
                     Console.WriteLine("Digite o nome do titular da conta");
                     string TitularP = Console.ReadLine();
 
-                    Console.WriteLine("Digite o saldo inicial da conta");
-                    decimal SaldoInicialP = decimal.Parse(Console.ReadLine());
 
+                    foreach (var conta in contas)
+                    {
+                        if (conta is ContaPoupanca)
+                        {
+                            if (conta.NumeroConta == NumeroContaP.ToString() && conta.Titular == TitularP)
+                            {
+                                loginNumeroConta = NumeroContaP;
 
+                                Console.WriteLine("Conta encontrada:");
+                                ((ContaPoupanca)conta).Detalhe_Poupanca();
+                            }
 
+                            else
+                            {
+                                Console.WriteLine("Conta não encontrada. Por favor, verifique o número da conta e o nome do titular.");
+                            }
+                        }
+                    }
 
                     break;
 
                 case 3:
                     Console.WriteLine("Acessando conta empresarial...");
 
-
-
-
                     Console.WriteLine("Digite o numero da conta");
-                    int NumeroContaÈ = int.Parse(Console.ReadLine());
+                    int NumeroContaE = int.Parse(Console.ReadLine());
 
                     Console.WriteLine("Digite o nome do titular da conta");
                     string TitularE = Console.ReadLine();
 
-                    Console.WriteLine("Digite o saldo inicial da conta");
-                    decimal SaldoInicialE = decimal.Parse(Console.ReadLine());
+
+                    foreach (var conta in contas)
+                    {
+                        if (conta is ContaEmpresarial)
+                        {
+                            if (conta.NumeroConta == NumeroContaE.ToString() && conta.Titular == TitularE)
+                            {
+                                loginNumeroConta = NumeroContaE;
+
+                                Console.WriteLine("Conta encontrada:");
+                                ((ContaEmpresarial)conta).Detalhe_Empresarial();
+                            }
+
+                            else
+                            {
+                                Console.WriteLine("Conta não encontrada. Por favor, verifique o número da conta e o nome do titular.");
+                            }
+                        }
+                    }
+
+
+
+
+
+                    //Console.WriteLine("Digite o numero da conta");
+                    //int NumeroContaE = int.Parse(Console.ReadLine());
+
+                    //Console.WriteLine("Digite o nome do titular da conta");
+                    //string TitularE = Console.ReadLine();
+
+                    //Console.WriteLine("Digite o saldo inicial da conta");
+                    //decimal SaldoInicialE = decimal.Parse(Console.ReadLine());
 
 
 
@@ -140,7 +186,7 @@
                     }
                     else
                     {
-                        Console.WriteLine("Nenhuma conta corrente acessada. Por favor, acesse uma conta corrente primeiro.");
+                        Console.WriteLine("Nenhuma conta acessada. Por favor, acesse uma conta primeiro.");
                     }
 
                    
@@ -149,6 +195,30 @@
 
                 case 5:
                     Console.WriteLine("Depósito de dinheiro...");
+
+                    if (loginNumeroConta != 0)
+                    {
+                        Console.WriteLine("Digite o valor do depósito:");
+                        decimal valorDeposito = decimal.Parse(Console.ReadLine());
+                        foreach (var conta in contas)
+                        {
+                            if (conta.NumeroConta == loginNumeroConta.ToString())
+                            {
+                                conta.Depositar(valorDeposito);
+                                Console.WriteLine($"Depósito de {valorDeposito:C} realizado com sucesso.");
+                                Console.WriteLine($"Saldo atual: {conta.Saldo:C}");
+                                break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Nenhuma conta acessada. Por favor, acesse uma conta primeiro.");
+                    }
+
+
+
+
                     break;
 
                 case 6:
@@ -157,6 +227,10 @@
 
 
                 case 7:
+                    Console.WriteLine("Realizando empréstimo...");
+                    break;
+
+                case 8:
                     Console.WriteLine("Saindo do programa....");
                     break;
 

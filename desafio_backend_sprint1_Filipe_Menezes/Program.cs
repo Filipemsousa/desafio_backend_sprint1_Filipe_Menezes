@@ -149,22 +149,6 @@
                         }
                     }
 
-
-
-
-
-                    //Console.WriteLine("Digite o numero da conta");
-                    //int NumeroContaE = int.Parse(Console.ReadLine());
-
-                    //Console.WriteLine("Digite o nome do titular da conta");
-                    //string TitularE = Console.ReadLine();
-
-                    //Console.WriteLine("Digite o saldo inicial da conta");
-                    //decimal SaldoInicialE = decimal.Parse(Console.ReadLine());
-
-
-
-
                     break;
 
                 case 4:
@@ -223,6 +207,22 @@
 
                 case 6:
                     Console.WriteLine("Consulta de saldo...");
+
+                    if (loginNumeroConta != 0)
+                    {
+                        foreach (var conta in contas)
+                        {
+                            if (conta.NumeroConta == loginNumeroConta.ToString())
+                            {
+                                Console.WriteLine($"Saldo atual: {conta.Saldo:C}");
+                                break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Nenhuma conta acessada. Por favor, acesse uma conta primeiro.");
+                    }
                     break;
 
 

@@ -165,7 +165,7 @@
                             if (conta.NumeroConta == loginNumeroConta.ToString())
                             {
                                 conta.Sacar(valorSaque);
-                                Console.WriteLine($"Saque de {valorSaque:C} realizado com sucesso.");
+                               
                                 Console.WriteLine($"Saldo atual: {conta.Saldo:C}");
                                 break;
                             }
@@ -192,8 +192,8 @@
                             if (conta.NumeroConta == loginNumeroConta.ToString())
                             {
                                 conta.Depositar(valorDeposito);
-                                Console.WriteLine($"Depósito de {valorDeposito:C} realizado com sucesso.");
-                                Console.WriteLine($"Saldo atual: {conta.Saldo:C}");
+                               
+                                
                                 break;
                             }
                         }

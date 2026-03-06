@@ -11,9 +11,9 @@
     {
         decimal valorTotal = valor;
 
-        if (valor > 0 && Saldo >= valorTotal)
+        if (valor > 0 && base.valorTotal >= valorTotal)
         {
-            Saldo -= valorTotal;
+            base.valorTotal -= valorTotal;
             Console.WriteLine($"Saque de R$ {valor} realizado com sucesso! Limite de empréstimo extra: R$ {limiteExtra}");
         }
         else
@@ -28,8 +28,8 @@
         // Verifica se o valor é positivo E se não ultrapassa o limite de 2000
         if (valor > 0 && valor <= limiteExtra)
         {
-            Saldo += valor;
-            Console.WriteLine($"O Empréstimo de R${valor} realizado com sucesso. Novo saldo: R${Saldo}");
+            valorTotal += valor;
+            Console.WriteLine($"O Empréstimo de R${valor} realizado com sucesso. Novo saldo: R${valorTotal}");
         }
         else if (valor > 2000)
         {
@@ -49,7 +49,7 @@
     {
         Console.WriteLine("--- Detalhes da Conta Empresarial ---");
         Console.WriteLine($"Titular: {Titular}");
-        Console.WriteLine($"Saldo Atual: R$ {Saldo}");
+        Console.WriteLine($"Saldo Atual: R$ {valorTotal}");
         Console.WriteLine($"Limite de empréstimo extra: R$ {limiteExtra}");
 
     }

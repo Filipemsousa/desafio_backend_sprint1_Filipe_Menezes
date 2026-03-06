@@ -4,20 +4,20 @@ abstract class ContaBancaria
 {
     public string NumeroConta { get; private set; }
     public string Titular { get; private set; }
-    public decimal Saldo { get; protected set; }
+    public decimal valorTotal { get; protected set; }
     public ContaBancaria(string numeroConta, string titular, decimal saldoInicial)
     {
         NumeroConta = numeroConta;
         Titular = titular;
-        Saldo = saldoInicial;
+        valorTotal = saldoInicial;
     }
 
     public virtual void Depositar(decimal valor)
     {
         if (valor > 0)
         {
-            Saldo += valor;
-            Console.WriteLine($"Depósito de R${valor} realizado com sucesso. Novo saldo: R${Saldo}");
+            valorTotal += valor;
+            Console.WriteLine($"Depósito de R${valor} realizado com sucesso. Novo saldo: R${valorTotal}");
         }
         else
         {
@@ -28,10 +28,10 @@ abstract class ContaBancaria
     {
         if (valor > 0)
         {
-            if (Saldo >= valor)
+            if (valorTotal >= valor)
             {
-                Saldo -= valor;
-                Console.WriteLine($"Saque de R${valor} realizado com sucesso. Novo saldo: R${Saldo}");
+                valorTotal -= valor;
+                Console.WriteLine($"Saque de R${valor} realizado com sucesso. Novo saldo: R${valorTotal}");
             }
             else
             {
@@ -50,8 +50,8 @@ abstract class ContaBancaria
         // Verifica se o valor é positivo E se não ultrapassa o limite de 2000
         if (valor > 0 && valor <= 2000)
         {
-            Saldo += valor;
-            Console.WriteLine($"O Empréstimo de R${valor} realizado com sucesso. Novo saldo: R${Saldo}");
+            valorTotal += valor;
+            Console.WriteLine($"O Empréstimo de R${valor} realizado com sucesso. Novo saldo: R${valorTotal}");
         }
         else if (valor > 2000)
         {
@@ -62,6 +62,8 @@ abstract class ContaBancaria
             Console.WriteLine("Valor de Empréstimo deve ser positivo.");
         }
     }
+
+    
 }
 
 

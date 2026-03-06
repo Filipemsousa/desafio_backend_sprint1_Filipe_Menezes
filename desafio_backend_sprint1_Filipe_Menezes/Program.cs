@@ -41,14 +41,15 @@
             Console.WriteLine("5 - Depositar dinheiro");
             Console.WriteLine("6 - Consultar saldo");
             Console.WriteLine("7 - Realizar empréstimo");
-            Console.WriteLine("8 - Sair");
+            Console.WriteLine("8 - Calcular Rendimento (Exclusivo para conta poupança)");
+            Console.WriteLine("9 - Sair");
 
             opcao = int.Parse(Console.ReadLine());
 
             Console.WriteLine($"Você escolheu a opção {opcao}");
         }
 
-        while (opcao != 8)
+        while (opcao != 9)
         {
             try
             {
@@ -166,7 +167,7 @@
                             {
                                 conta.Sacar(valorSaque);
                                
-                                Console.WriteLine($"Saldo atual: {conta.Saldo:C}");
+                                Console.WriteLine($"Saldo atual: {conta.valorTotal:C}");
                                 break;
                             }
                         }
@@ -217,7 +218,7 @@
                         {
                             if (conta.NumeroConta == loginNumeroConta.ToString())
                             {
-                                Console.WriteLine($"Saldo atual: {conta.Saldo:C}");
+                                Console.WriteLine($"Saldo atual: {conta.valorTotal:C}");
                                 break;
                             }
                         }
@@ -259,6 +260,40 @@
                         break;
 
                 case 8:
+                    Console.WriteLine("Calculando Redimento.....");
+
+                      
+                        if (loginNumeroConta != 0)
+                        {
+                            Console.WriteLine("Digite o valor para simular o rendimento");
+                            decimal valorRedimento = decimal.Parse(Console.ReadLine());
+                         
+                            var contasPoupanca = contas.Where((x) => x.GetType() == typeof(ContaPoupanca)).ToList();
+                            foreach (ContaPoupanca conta in contasPoupanca)
+                            {
+
+                                if (conta.NumeroConta == loginNumeroConta.ToString() && conta.GetType() == typeof(ContaPoupanca))
+                                {
+                                    //conta.calcularRendimento(valorRedimento);
+                                    conta.calcularRendimento(valorRedimento);
+
+
+                                    break;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Somente para contas do tipo poupança");
+                                }
+                             }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Nenhuma conta acessada. Por favor, acesse uma conta primeiro.");
+                        }
+
+                        break;
+
+                case 9:
                     Console.WriteLine("Saindo do programa....");
                     break;
 

@@ -14,9 +14,9 @@
     {
         decimal valorTotal = valor + TaxaSaque;
 
-        if (valor > 0 && Saldo >= valorTotal)
+        if (valor > 0 && base.valorTotal >= valorTotal)
         {
-            Saldo -= valorTotal;
+            base.valorTotal -= valorTotal;
             Console.WriteLine($"Saque de R$ {valor} realizado com sucesso! (Taxa: R$ {TaxaSaque})");
         }
         else
@@ -30,7 +30,7 @@
     {
         Console.WriteLine("--- Detalhes da Conta Corrente ---");
         Console.WriteLine($"Titular: {Titular}");
-        Console.WriteLine($"Saldo Atual: R$ {Saldo}");
+        Console.WriteLine($"Saldo Atual: R$ {valorTotal}");
         Console.WriteLine($"Taxa de Saque: R$ {TaxaSaque}");
     }
 }

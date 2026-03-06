@@ -1,6 +1,9 @@
-﻿class ContaPoupanca : ContaBancaria
+﻿using desafio_backend_sprint1_Filipe_Menezes;
+
+class ContaPoupanca : ContaBancaria , IRendimento
+
 {
-    private const decimal Rendimento = 1.500m;
+    private const decimal valorRendimento = 0.015m;
     public ContaPoupanca(string titular, string numeroConta, decimal saldoInicial) : base(titular, numeroConta, saldoInicial)
     {
 
@@ -10,10 +13,10 @@
     {
         decimal valorTotal = valor;
 
-        if (valor > 0 && Saldo >= valorTotal)
+        if (valor > 0 && base.valorTotal >= valorTotal)
         {
-            Saldo -= valorTotal;
-            Console.WriteLine($"Saque de R$ {valor} realizado com sucesso! (Redimento: {Rendimento} %)");
+            base.valorTotal -= valorTotal;
+            Console.WriteLine($"Saque de R$ {valor} realizado com sucesso! (Redimento: {valorRendimento} %)");
         }
         else
         {
@@ -21,12 +24,25 @@
         }
     }
 
+
+    public  decimal calcularRendimento(decimal valorTotal)
+    {
+        // 1. Calcula o novo valor e atualiza a variável de instância
+        valorTotal = valorTotal + (valorTotal * valorRendimento);
+
+        // 2. Retorna o valor total atualizado (ou o lucro, dependendo da sua intenção)
+        Console.WriteLine($"O valor após o rendimento foi {valorTotal}");
+        return valorTotal;
+        
+    }
+
     public void Detalhe_Poupanca()
     {
         Console.WriteLine("--- Detalhes da Conta Poupança ---");
         Console.WriteLine($"Titular: {Titular}");
-        Console.WriteLine($"Saldo Atual: R$ {Saldo}");
-        Console.WriteLine($"Rendimento mensal: {Rendimento} %");
+        Console.WriteLine($"Saldo Atual: R$ {valorTotal}");
+        Console.WriteLine($"Rendimento mensal: {valorRendimento} %");
+        
 
     }
 }

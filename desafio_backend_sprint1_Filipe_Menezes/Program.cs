@@ -50,7 +50,10 @@
 
         while (opcao != 8)
         {
+            try
+            {
 
+            
             ExibirMenu();
 
             switch (opcao)
@@ -240,8 +243,18 @@
                     break;
             }
 
-     
-    }
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Entrada inválida. Digite um número válido.");
+
+                
+            }
+
+
+
+
+        }
 
     }
 

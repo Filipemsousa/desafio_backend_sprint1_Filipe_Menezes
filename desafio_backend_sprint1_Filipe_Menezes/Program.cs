@@ -231,7 +231,32 @@
 
                 case 7:
                     Console.WriteLine("Realizando empréstimo...");
-                    break;
+
+
+                        if (loginNumeroConta != 0)
+                        {
+                            Console.WriteLine("Digite o valor do Empréstimo. Conta Empresárial tem limite extra para até R$ 5000, demais contas até R$ 2000:");
+                            decimal valorEmprestimo = decimal.Parse(Console.ReadLine());
+                            foreach (var conta in contas)
+                            {
+                                if (conta.NumeroConta == loginNumeroConta.ToString())
+                                {
+                                    conta.Emprestimo(valorEmprestimo);
+                                   
+                                    
+                                    break;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Nenhuma conta acessada. Por favor, acesse uma conta primeiro.");
+                        }
+
+
+
+
+                        break;
 
                 case 8:
                     Console.WriteLine("Saindo do programa....");

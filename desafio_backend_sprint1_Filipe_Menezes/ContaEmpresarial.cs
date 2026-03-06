@@ -1,6 +1,6 @@
 ﻿class ContaEmpresarial: ContaBancaria
 {
-    private const decimal limiteExtra = 500m;
+    private const decimal limiteExtra = 5000m;
     public ContaEmpresarial(string numeroConta, string titular, decimal saldoInicial) : base(numeroConta, titular, saldoInicial)
     {
     }
@@ -21,6 +21,27 @@
             Console.WriteLine("Saldo insuficiente para realizar o saque com a taxa ou valor inválido.");
         }
     }
+
+
+    public override void Emprestimo(decimal valor)
+    {
+        // Verifica se o valor é positivo E se não ultrapassa o limite de 2000
+        if (valor > 0 && valor <= limiteExtra)
+        {
+            Saldo += valor;
+            Console.WriteLine($"O Empréstimo de R${valor} realizado com sucesso. Novo saldo: R${Saldo}");
+        }
+        else if (valor > 2000)
+        {
+            Console.WriteLine("Operação negada: O valor máximo para empréstimo com uso do limite extra é de R$5000.");
+        }
+        else
+        {
+            Console.WriteLine("Valor de Empréstimo deve ser positivo.");
+        }
+    }
+
+
 
 
 

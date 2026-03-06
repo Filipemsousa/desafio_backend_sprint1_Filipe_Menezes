@@ -44,6 +44,24 @@ abstract class ContaBancaria
             Console.WriteLine("Valor de saque deve ser positivo.");
         }
     }
+
+    public virtual void Emprestimo(decimal valor)
+    {
+        // Verifica se o valor é positivo E se não ultrapassa o limite de 2000
+        if (valor > 0 && valor <= 2000)
+        {
+            Saldo += valor;
+            Console.WriteLine($"O Empréstimo de R${valor} realizado com sucesso. Novo saldo: R${Saldo}");
+        }
+        else if (valor > 2000)
+        {
+            Console.WriteLine("Operação negada: O valor máximo para empréstimo é de R$2000.");
+        }
+        else
+        {
+            Console.WriteLine("Valor de Empréstimo deve ser positivo.");
+        }
+    }
 }
 
 

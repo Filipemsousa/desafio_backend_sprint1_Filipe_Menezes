@@ -25,7 +25,7 @@ class ContaPoupanca : ContaBancaria , IRendimento
     }
 
 
-    public  decimal calcularRendimento(decimal valorTotal)
+    public  decimal calcularRendimento()
     {
         // 1. Calcula o novo valor e atualiza a variável de instância
         valorTotal = valorTotal + (valorTotal * valorRendimento);

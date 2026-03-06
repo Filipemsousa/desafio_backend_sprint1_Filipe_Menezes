@@ -265,17 +265,16 @@
                       
                         if (loginNumeroConta != 0)
                         {
-                            Console.WriteLine("Digite o valor para simular o rendimento");
-                            decimal valorRedimento = decimal.Parse(Console.ReadLine());
+                            
                          
                             var contasPoupanca = contas.Where((x) => x.GetType() == typeof(ContaPoupanca)).ToList();
                             foreach (ContaPoupanca conta in contasPoupanca)
                             {
 
-                                if (conta.NumeroConta == loginNumeroConta.ToString() && conta.GetType() == typeof(ContaPoupanca))
+                                if (conta.NumeroConta == loginNumeroConta.ToString())
                                 {
                                     //conta.calcularRendimento(valorRedimento);
-                                    conta.calcularRendimento(valorRedimento);
+                                    conta.calcularRendimento();
 
 
                                     break;
